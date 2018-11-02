@@ -16,7 +16,7 @@ export const songsList = [{
     "id": "3",
     "url": "../../music/03.mp3",
     "time": "05:52",
-    "title": "The Humours of Lisheen_Art O'Keeffe's",
+    "title": "The Humours of Lisheen / Art O'Keeffe's",
     "artist": "Julia Clifford and Reg Hall(piano)"
   },
   {

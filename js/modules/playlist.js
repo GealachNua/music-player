@@ -1,4 +1,6 @@
-import { songsList } from '../data/songs.js'
+import { songsList } from '../data/songs.js';
+import PlayInfo from '../modules/play-info.js';
+
 
 const PlayList = ( _ => {
   // data or state
@@ -13,6 +15,10 @@ const PlayList = ( _ => {
   const init = _ => {
     render();
     listeners();
+    PlayInfo.setState({
+      songsLength: songs.length,
+      isPlaying: !currentSong.paused
+    })
   }
 
   const changeAudioSrc = _ => {
@@ -34,6 +40,19 @@ const PlayList = ( _ => {
       changeAudioSrc();
       togglePlayPause();
     }
+    PlayInfo.setState({
+      songsLength: songs.length,
+      isPlaying: !currentSong.paused
+    })
+  }
+
+  const playNext = _ => {
+    if (songs[currentlyPlayingIndex + 1]) {
+      currentlyPlayingIndex ++;
+      changeAudioSrc();
+      togglePlayPause();
+      render();
+   }
   }
 
   const listeners = _ => {
@@ -48,6 +67,10 @@ const PlayList = ( _ => {
         mainPlay(listElemIndex);
         render();
       }
+    })
+
+    currentSong.addEventListener('ended', _ => {
+      playNext();
     })
   }
 
